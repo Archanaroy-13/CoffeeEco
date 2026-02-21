@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Eco — Premium Coffee & Bakery</title>
+  <meta name="description" content="Artisan coffee, freshly baked goods and a warm space to linger." />
+  <link rel="stylesheet" href="/styles.css" />
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+<!-- ========================
+     NAVBAR
+     ======================== -->
+<header id="navbar">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="#" class="nav-logo" onclick="showPage('home');return false;">
+        Coffee <span>Eco</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#" data-page="home" class="active" onclick="showPage('home');return false;">Home</a></li>
+        <li><a href="#" data-page="drinks" onclick="showPage('drinks');return false;">Menu</a></li>
+        <li><a href="#featured" onclick="showPage('home');setTimeout(()=>document.querySelector('#featured').scrollIntoView({behavior:'smooth'}),50);return false;">Featured</a></li>
+        <li><a href="#other-products" onclick="showPage('home');setTimeout(()=>document.querySelector('#other-products').scrollIntoView({behavior:'smooth'}),50);return false;">Bakery</a></li>
+        <li><a href="#newsletter" onclick="showPage('home');setTimeout(()=>document.querySelector('#newsletter').scrollIntoView({behavior:'smooth'}),50);return false;">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Cart -->
+        <button class="cart-btn" onclick="openCart()" aria-label="Open cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+
+        <!-- Auth buttons -->
+        <button class="nav-auth-btn" id="login-btn" onclick="openModal()">Sign In</button>
+        <button class="nav-auth-btn" id="logout-btn" onclick="doLogout()">Sign Out</button>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="showPage('home');return false;">Home</a>
+  <a href="#" onclick="showPage('drinks');return false;">Menu</a>
+  <a href="#featured" onclick="showPage('home');return false;">Featured</a>
+  <a href="#other-products" onclick="showPage('home');return false;">Bakery</a>
+  <a href="#" onclick="openModal();return false;">Sign In</a>
+</div>
+
+<!-- ========================
+     HOME PAGE
+     ======================== -->
+<main id="home-page" class="page active">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="container" style="position:relative; z-index:2;">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Artisan · Organic · Sustainable</p>
+        <h1 class="hero-title">
+          Where every<br>
+          cup tells<br>
+          a <em>story.</em>
+        </h1>
+        <p class="hero-desc">
+          Hand-crafted espresso blends sourced from single-origin farms, paired with
+          slow-fermented breads baked fresh each morning.
+        </p>
+        <div class="hero-cta">
+          <a href="#" class="btn-primary" onclick="showPage('drinks');return false;">
+            Explore Menu
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#featured" class="btn-ghost">Our Story</a>
+        </div>
+
+        <!-- Stats -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">24<span>+</span></div>
+            <div class="stat-label">Blends</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">12<span>k</span></div>
+            <div class="stat-label">Regulars</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">8<span></span></div>
+            <div class="stat-label">Origins</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="hero-image-wrap">
+      <div class="hero-ring"></div>
+      <img
+        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=85"
+        alt="Artisan coffee in a black bowl"
+      />
+    </div>
+  </section>
+
+  <!-- FEATURED DRINKS -->
+  <section id="featured">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="accent-bar"></span>
+          <h2 class="section-title fade-in-up">Beloved<br>Favourites</h2>
+          <p class="section-sub fade-in-up">Our most-ordered cups, perfected over time</p>
+        </div>
+        <a href="#" class="btn-ghost fade-in-up" onclick="showPage('drinks');return false;">
+          View All Drinks →
+        </a>
+      </div>
+
+      <div class="product-grid" id="featured-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER PRODUCTS — BAKERY -->
+  <section id="other-products">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="accent-bar"></span>
+          <h2 class="section-title fade-in-up">From Our<br>Kitchen</h2>
+          <p class="section-sub fade-in-up">Baked fresh daily — breads, pastries & more</p>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs" id="bakery-tabs">
+        <button class="tab-btn active" data-cat="all" onclick="renderBakery('all')">All</button>
+        <button class="tab-btn" data-cat="breads" onclick="renderBakery('breads')">Breads</button>
+        <button class="tab-btn" data-cat="pastries" onclick="renderBakery('pastries')">Pastries</button>
+        <button class="tab-btn" data-cat="desserts" onclick="renderBakery('desserts')">Desserts</button>
+        <button class="tab-btn" data-cat="sweets" onclick="renderBakery('sweets')">Sweets</button>
+      </div>
+
+      <div class="bakery-grid" id="bakery-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div>
+          <span class="accent-bar"></span>
+          <h2 class="section-title fade-in-up">Stay in the loop</h2>
+          <p class="section-sub fade-in-up">Seasonal menus, events and early-bird offers</p>
+        </div>
+        <div>
+          <form class="newsletter-form fade-in-up" onsubmit="event.preventDefault();showToast('Thanks for subscribing ☕')">
+            <input type="email" placeholder="your@email.com" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========================
+     DRINKS PAGE
+     ======================== -->
+<div id="drinks-page" class="page" style="padding-top:0;">
+  <div style="background: linear-gradient(180deg, #0f0d0b 0%, #1a1008 100%); padding: 7rem 0 4rem;">
+    <div class="container drinks-header">
+      <span class="accent-bar"></span>
+      <h1 class="drinks-page-title">Our Full Menu</h1>
+      <p class="section-sub">Every cup crafted with intention</p>
+
+      <!-- Category Filters -->
+      <div class="category-filters" id="drinks-filters" style="margin-top: 1.8rem;">
+        <button class="tab-btn active" data-cat="all" onclick="renderDrinksPage('all')">All Drinks</button>
+        <button class="tab-btn" data-cat="espresso" onclick="renderDrinksPage('espresso')">Espresso</button>
+        <button class="tab-btn" data-cat="iced" onclick="renderDrinksPage('iced')">Iced</button>
+        <button class="tab-btn" data-cat="specialty" onclick="renderDrinksPage('specialty')">Specialty</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom: 6rem;">
+    <div class="drinks-grid" id="drinks-page-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div class="container" style="padding-bottom: 4rem; text-align: center;">
+    <button class="btn-ghost" onclick="showPage('home')">← Back to Home</button>
+  </div>
+</div>
+
+<!-- ========================
+     FOOTER (shown on home)
+     ======================== -->
+<footer id="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">Coffee <span style="color:var(--accent)">Eco</span></div>
+        <p>A warm corner for slow mornings, long conversations and exceptional coffee. Sourced responsibly. Served with care.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <a href="#" onclick="showPage('drinks');return false;">Espresso</a>
+        <a href="#" onclick="showPage('drinks');return false;">Iced Drinks</a>
+        <a href="#" onclick="showPage('drinks');return false;">Specialty</a>
+        <a href="#other-products">Bakery</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <a href="#">14 Bloom Street</a>
+        <a href="#">Open 7am – 8pm</a>
+        <a href="#">Mon – Sun</a>
+        <a href="#">+1 (555) 012 3456</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">Our Story</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Coffee Eco. All rights reserved.</p>
+      <p>Crafted with care &amp; caffeine.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ========================
+     CART PANEL
+     ======================== -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<aside class="cart-panel" id="cart-panel" role="dialog" aria-label="Shopping cart">
+  <div class="cart-panel-head">
+    <h3>Your Cart</h3>
+    <button class="close-cart" onclick="closeCart()" aria-label="Close cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-empty hidden" id="cart-empty">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    <p>Your cart is empty.<br>Add something delicious.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-val" id="cart-total">$0.00</span>
+    </div>
+    <button class="btn-primary checkout-btn" onclick="showToast('Checkout coming soon ☕')">
+      Checkout
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</aside>
+
+<!-- ========================
+     LOGIN MODAL
+     ======================== -->
+<div class="modal-overlay" id="login-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <h2>Welcome back</h2>
+    <p>Sign in to access your orders and loyalty rewards</p>
+    <form onsubmit="doLogin(event)">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" required />
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn-primary">Sign In</button>
+        <span class="modal-close-link" onclick="closeModal()">Cancel</span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ========================
+     TOAST
+     ======================== -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="/script.js"></script>
+</body>
+</html>
